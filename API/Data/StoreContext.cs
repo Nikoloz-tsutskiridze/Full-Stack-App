@@ -4,8 +4,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Data;
 
-public class StoreContext(DbContextOptions options) : DbContext(options)
+public class StoreContext : DbContext
 {
-  public DbSet<Product> Products { get; set; }
+  public StoreContext(DbContextOptions<StoreContext> options) : base(options)
+  {
+  }
 
+  public DbSet<Product> Products { get; set; }
 }
