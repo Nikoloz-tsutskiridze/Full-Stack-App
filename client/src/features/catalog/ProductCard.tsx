@@ -7,6 +7,7 @@ import {
   Typography,
 } from "@mui/material";
 import { Product } from "../../app/models/Product";
+import { Link } from "react-router-dom";
 
 type Props = {
   product: Product;
@@ -18,7 +19,7 @@ export default function ProductCard({ product }: Props) {
       elevation={3}
       sx={{
         width: 280,
-        borderRadius: 2,
+        borderRadius: 6,
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
@@ -37,12 +38,13 @@ export default function ProductCard({ product }: Props) {
         >
           {product.name}
         </Typography>
-        <Typography variant="h6" sx={{ color: "secondary.main" }}>
+        <Typography variant="h6" sx={{ color: "green" }}>
           ${(product.price / 100).toFixed(2)}
         </Typography>
       </CardContent>
+
       <CardActions sx={{ justifyContent: "space-between" }}>
-        <button className="relative inline-flex items-center gap-3 border-none cursor-pointer bg-[#7808d0] text-white rounded-full font-semibold py-2 px-4 pl-5 whitespace-nowrap overflow-hidden text-ellipsis transition-colors hover:bg-black ">
+        <button className="relative inline-flex items-center gap-3 border-none cursor-pointer bg-[#7808d0] text-white rounded-full font-semibold py-2 px-2 whitespace-nowrap overflow-hidden text-ellipsis transition-colors hover:bg-[#71518e] ">
           <span className="flex-shrink-0 w-6 h-6 relative text-[#6400b1] bg-white  rounded-full grid place-items-center overflow-hidde">
             <svg
               viewBox="0 0 14 15"
@@ -58,7 +60,13 @@ export default function ProductCard({ product }: Props) {
           </span>
           Add Product
         </button>
-        <Button>View</Button>
+        <Button
+          component={Link}
+          to={`/catalog/${product.id}`}
+          sx={{ color: "orangered" }}
+        >
+          View
+        </Button>
       </CardActions>
     </Card>
   );
