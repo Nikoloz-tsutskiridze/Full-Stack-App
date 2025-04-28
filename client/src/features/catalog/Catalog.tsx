@@ -1,19 +1,20 @@
-import { useEffect, useState } from "react";
-import { Product } from "../../app/models/Product";
+import Loader from "../Loader";
 import ProductList from "./ProductList";
+import { useFetchProductsQuery } from "./catalogApi";
 
 export default function Catalog() {
-  const [product, setProduct] = useState<Product[]>([]);
+  const { data, isLoading } = useFetchProductsQuery();
 
-  useEffect(() => {
-    fetch("http://localhost:5148/api/products")
-      .then((response) => response.json())
-      .then((data) => setProduct(data));
-  }, []);
+  if (isLoading || !data)
+    return (
+      <div className="flex justify-center items-center">
+        <Loader />
+      </div>
+    );
 
   return (
-    <div>
-      <ProductList products={product} />
-    </div>
+    <>
+      <ProductList products={data} />
+    </>
   );
 }
